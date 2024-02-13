@@ -47,10 +47,7 @@ impl MenuEntry {
         self
     }
     pub fn chainloader(&mut self, path: &str) -> &Self {
-        match self.mods.iter().find(|m| m.as_ref() == "chain") {
-            None => { self.insmod("chain"); }
-            _ => {}
-        };
+        if !self.mods.iter().any(|m| m.as_ref() == "chain") { self.insmod("chain"); };
         if path.starts_with("/") {
             self.statements.push(format!(r"chainloader {}", path));
         } else {
