@@ -2,7 +2,7 @@
 name = "grub_mkconfig_lib"
 description = "grub mkconfig lib for Rust!"
 repository = "https://github.com/CyanChanges/mkconfig_lib_rs"
-version = "0.0.1"
+version = "0.0.2"
 edition = "2021"
 license = "MIT"
 
