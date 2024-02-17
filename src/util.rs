@@ -37,7 +37,7 @@ macro_rules! indent {
 }
 
 pub(crate) fn statements_indent(statement: &Vec<Statement>, append_newline: bool) -> String {
-    if statement.is_empty() || (statement.iter().find(|x| !x.is_empty()).is_none()) {
+    if statement.is_empty() || !statement.iter().any(|x| !x.is_empty()) {
         "".to_string()
     } else {
         Tab.to_string() + indent::indent_with(Tab, statement.join("\n")).as_str() + if append_newline { "\n" } else { "" }
@@ -54,27 +54,30 @@ pub(crate) fn str_lines_indent(str: &str, append_new_line: bool) -> String {
 
 #[cfg(test)]
 mod tests {
+    #[allow(unused_imports)]
     use crate::misc::GRUB_TAB as Tab;
     use crate::util::statements_indent;
 
     #[test]
     fn test_indent() {
-        assert_eq!( // With new line
+        // With new line
+        assert_eq!(
             statements_indent(&vec![
                 "Hello".to_string(),
                 "World".to_string(),
             ], true),
-                    format!("\
+            format!("\
             {Tab}{}\n\
             {Tab}{}\n\
             ", "Hello", "World")
         );
-        assert_eq!( // Without new line
+        // Without new line
+        assert_eq!(
             statements_indent(&vec![
                 "Hello".to_string(),
                 "World".to_string(),
             ], false),
-                    format!("\
+            format!("\
             {Tab}{}\n\
             {Tab}{}\
             ", "Hello", "World")
