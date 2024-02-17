@@ -22,9 +22,10 @@ pub fn get_os() -> String {
 
 trait AddTab {
     fn grub_add_tab(&self) -> String;
+    fn grub_add_indent(&self) -> String;
 }
 
-const GRUB_TAB: &str = "  ";
+pub const GRUB_TAB: &str = "  ";
 
 impl AddTab for String {
     fn grub_add_tab(&self) -> Self {
@@ -34,6 +35,10 @@ impl AddTab for String {
         }
         str.insert_str(0, GRUB_TAB);
         str
+    }
+
+    fn grub_add_indent(&self) -> String {
+        todo!()
     }
 }
 
